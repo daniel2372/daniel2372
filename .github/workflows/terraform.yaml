@@ -69,9 +69,9 @@ jobs:
         #id: validate
         run: terraform validate
 
-      - name: Terraform plan
+     # - name: Terraform plan
         #id: plan
-        run: terraform plan -out=tfplan
+      #  run: terraform plan -out=tfplan
 
       - name: Terraform show
         #id: show
@@ -82,7 +82,7 @@ jobs:
         with:
             directory: .
             soft_fail: true
-            framework: terraform
+            framework: terraform 
 
       #- name: Run Checkov
        # run: docker run --volume "${{ env.GITHUB_WORKSPACE }}":/tf bridgecrew/checkov -f tfplan.json --soft-fail
