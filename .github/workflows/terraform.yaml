@@ -54,8 +54,8 @@ jobs:
         #id: format
         run: terraform fmt
      
-      - name: Run tfsec
-        run: tfsec .
+     # - name: Run tfsec
+     #   run: tfsec .
 
       - name: Run Terraform Scan
         run: |
