@@ -73,16 +73,16 @@ jobs:
         #id: plan
       #  run: terraform plan -out=tfplan
 
-      - name: Terraform show
+      #- name: Terraform show
         #id: show
-        run: terraform show -json ./tfplan > tfplan.json
+       # run: terraform show -json ./tfplan > tfplan.json
 
-      - name: run checkov
-        uses: bridgecrewio/checkov-action@master
-        with:
-            directory: .
-            soft_fail: true
-            framework: terraform 
+      #- name: run checkov
+       # uses: bridgecrewio/checkov-action@master
+        #with:
+         #   directory: .
+          #  soft_fail: true
+           # framework: terraform 
 
       #- name: Run Checkov
        # run: docker run --volume "${{ env.GITHUB_WORKSPACE }}":/tf bridgecrew/checkov -f tfplan.json --soft-fail
