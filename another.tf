@@ -6,6 +6,9 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   ami = data.aws_ami.amzlinux2.id
 
+root_block_device {
+      encrypted = true
+  }
 }
 
 resource "aws_vpc" "demo_vpc" {
@@ -29,6 +32,12 @@ resource "aws_launch_configuration" "my_web_config" {
   image_id = data.aws_ami.amzlinux2.id
   instance_type = "t2.micro"
 
+  metadata_options {
+       http_tokens = "required"
+     }  
+ root_block_device {
+        encrypted = true
+    }
 }
 
 data "aws_ami" "amzlinux2" {
@@ -53,6 +62,25 @@ data "aws_ami" "amzlinux2" {
 }
 
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "<your-bucket-name>"
+  bucket = "dannys3bucket1478"
+
+   versioning {
+        enabled = true
+    }
+      logging {
+        target_bucket = "dannys3bucket1478"
+    }
+   server_side_encryption_configuration {
+     rule {
+       apply_server_side_encryption_by_default {
+         kms_master_key_id = "arn"
+         sse_algorithm     = "aws:kms"
+       }
+     }
+   }
 }
 
+resource "aws_s3_bucket_public_access_block" "my_bucket" {
+  bucket = aws_s3_bucket.my_bucket.id
+  block_public_acls = true
+}
