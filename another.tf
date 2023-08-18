@@ -17,6 +17,12 @@ root_block_device {
 resource "aws_vpc" "demo_vpc" {
   cidr_block = "10.0.0.0/16"
 }
+resource "aws_flow_log" "demo_vpc" {
+  #iam_role_arn    = aws_iam_role.example.arn
+  #log_destination = aws_cloudwatch_log_group.example.arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.demo_vpc.id
+}
 
 resource "aws_autoscaling_group" "my_asg" {
   availability_zones        = ["us-west-1a"]
