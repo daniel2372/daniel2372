@@ -73,7 +73,7 @@ data "aws_ami" "amzlinux2" {
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "dannys3bucket1478"
 }
-resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "my_bucket" {
   bucket = aws_s3_bucket.mybucket.id
 
   rule {
@@ -84,7 +84,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
   }
 }
 resource "aws_s3_bucket_versioning" "versioning_example" {
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.versioning_example.id
   versioning_configuration {
     status = "Enabled"
   }
